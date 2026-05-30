@@ -13,8 +13,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var node_fs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(node_fs__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var node_zlib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8522);
 /* harmony import */ var node_zlib__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(node_zlib__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9038);
-/* harmony import */ var _actions_github__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5843);
+/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(4442);
+/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_actions_core__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _actions_github__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5251);
+/* harmony import */ var _actions_github__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_actions_github__WEBPACK_IMPORTED_MODULE_3__);
 // SARIF upload to GitHub Code Scanning.
 //
 // ACTION-03: POST /repos/{owner}/{repo}/code-scanning/sarifs with gzip+base64 body.
@@ -34,16 +36,16 @@ __webpack_require__.r(__webpack_exports__);
 
 async function uploadSarif(input) {
     if (input.isFork) {
-        _actions_core__WEBPACK_IMPORTED_MODULE_2__/* .warning */ .$e("Skipping SARIF upload: security-events: write not available on fork PRs");
+        _actions_core__WEBPACK_IMPORTED_MODULE_2__.warning("Skipping SARIF upload: security-events: write not available on fork PRs");
         return;
     }
     if (!(0,node_fs__WEBPACK_IMPORTED_MODULE_0__.existsSync)(input.sarifPath)) {
-        _actions_core__WEBPACK_IMPORTED_MODULE_2__/* .warning */ .$e(`Skipping SARIF upload: file not found at ${input.sarifPath}`);
+        _actions_core__WEBPACK_IMPORTED_MODULE_2__.warning(`Skipping SARIF upload: file not found at ${input.sarifPath}`);
         return;
     }
     const token = process.env["GITHUB_TOKEN"];
     if (typeof token !== "string" || token.length === 0) {
-        _actions_core__WEBPACK_IMPORTED_MODULE_2__/* .warning */ .$e("Skipping SARIF upload: GITHUB_TOKEN not available (require security-events: write in workflow permissions)");
+        _actions_core__WEBPACK_IMPORTED_MODULE_2__.warning("Skipping SARIF upload: GITHUB_TOKEN not available (require security-events: write in workflow permissions)");
         return;
     }
     // T-05-04-03: SARIF written by trusted CLI to RUNNER_TEMP a few hundred ms ago;
@@ -51,13 +53,13 @@ async function uploadSarif(input) {
     const sarifJson = (0,node_fs__WEBPACK_IMPORTED_MODULE_0__.readFileSync)(input.sarifPath, "utf8");
     const compressed = (0,node_zlib__WEBPACK_IMPORTED_MODULE_1__.gzipSync)(Buffer.from(sarifJson));
     const sarif = compressed.toString("base64");
-    const octokit = _actions_github__WEBPACK_IMPORTED_MODULE_3__/* .getOctokit */ .Q(token);
-    const { owner, repo } = _actions_github__WEBPACK_IMPORTED_MODULE_3__/* .context */ ._.repo;
-    const pr = _actions_github__WEBPACK_IMPORTED_MODULE_3__/* .context */ ._.payload["pull_request"];
-    const commitSha = pr?.head.sha ?? _actions_github__WEBPACK_IMPORTED_MODULE_3__/* .context */ ._.sha;
+    const octokit = _actions_github__WEBPACK_IMPORTED_MODULE_3__.getOctokit(token);
+    const { owner, repo } = _actions_github__WEBPACK_IMPORTED_MODULE_3__.context.repo;
+    const pr = _actions_github__WEBPACK_IMPORTED_MODULE_3__.context.payload["pull_request"];
+    const commitSha = pr?.head.sha ?? _actions_github__WEBPACK_IMPORTED_MODULE_3__.context.sha;
     const ref = pr !== undefined && typeof pr.number === "number"
         ? `refs/pull/${pr.number}/head`
-        : _actions_github__WEBPACK_IMPORTED_MODULE_3__/* .context */ ._.ref;
+        : _actions_github__WEBPACK_IMPORTED_MODULE_3__.context.ref;
     try {
         const { data } = await octokit.rest.codeScanning.uploadSarif({
             owner,
@@ -68,7 +70,7 @@ async function uploadSarif(input) {
             tool_name: "hookwarden",
         });
         const id = data.id ?? "<no-id>";
-        _actions_core__WEBPACK_IMPORTED_MODULE_2__/* .info */ .pq(`SARIF upload accepted: ${id}`);
+        _actions_core__WEBPACK_IMPORTED_MODULE_2__.info(`SARIF upload accepted: ${id}`);
     }
     catch (err) {
         // Never throw — Plan 02's index.ts already drives ACTION-04 from the scan exit
@@ -76,10 +78,10 @@ async function uploadSarif(input) {
         const status = err.status;
         const msg = err instanceof Error ? err.message : String(err);
         if (status === 403) {
-            _actions_core__WEBPACK_IMPORTED_MODULE_2__/* .warning */ .$e("Skipping SARIF upload: security-events: write not available (likely fork PR or missing workflow permissions)");
+            _actions_core__WEBPACK_IMPORTED_MODULE_2__.warning("Skipping SARIF upload: security-events: write not available (likely fork PR or missing workflow permissions)");
         }
         else {
-            _actions_core__WEBPACK_IMPORTED_MODULE_2__/* .warning */ .$e(`SARIF upload failed: ${msg}`);
+            _actions_core__WEBPACK_IMPORTED_MODULE_2__.warning(`SARIF upload failed: ${msg}`);
         }
     }
 }

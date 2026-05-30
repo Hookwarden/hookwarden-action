@@ -6,3 +6,4 @@ export interface PostCommentInput {
     readonly eventName: string;
 }
 export declare function postOrUpdateStickyComment(input: PostCommentInput): Promise<void>;
+//# sourceMappingURL=comment.d.ts.map

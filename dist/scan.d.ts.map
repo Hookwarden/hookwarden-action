@@ -1,1 +1,1 @@
-{"version":3,"file":"","sourceRoot":"","sources":["file:///home/runner/work/hookwarden/hookwarden/packages/github-action/src/scan.ts"],"names":[],"mappings":"AAwBA,OAAO,KAAK,EAAE,YAAY,EAAE,gBAAgB,EAAoC,MAAM,YAAY,CAAC;AAkFnG,wBAAsB,aAAa,CAAC,MAAM,EAAE,YAAY,GAAG,OAAO,CAAC,gBAAgB,CAAC,CAoFnF"}
+{"version":3,"file":"scan.d.ts","sourceRoot":"","sources":["../src/scan.ts"],"names":[],"mappings":"AAwBA,OAAO,KAAK,EAAE,YAAY,EAAE,gBAAgB,EAAoC,MAAM,YAAY,CAAC;AAkFnG,wBAAsB,aAAa,CAAC,MAAM,EAAE,YAAY,GAAG,OAAO,CAAC,gBAAgB,CAAC,CAoFnF"}
