@@ -3,4 +3,3 @@ export interface UploadSarifInput {
     readonly isFork: boolean;
 }
 export declare function uploadSarif(input: UploadSarifInput): Promise<void>;
-//# sourceMappingURL=sarif-upload.d.ts.map

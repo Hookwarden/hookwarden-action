@@ -46,4 +46,3 @@ export interface ActionScanOutput {
     readonly eventName: string;
     readonly isFork: boolean;
 }
-//# sourceMappingURL=types.d.ts.map
