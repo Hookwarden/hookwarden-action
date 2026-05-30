@@ -13,10 +13,10 @@ __webpack_require__.d(__webpack_exports__, {
   postOrUpdateStickyComment: () => (/* binding */ postOrUpdateStickyComment)
 });
 
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@actions+core@1.11.1/node_modules/@actions/core/lib/core.js
-var core = __webpack_require__(4442);
-// EXTERNAL MODULE: ../../node_modules/.pnpm/@actions+github@6.0.1/node_modules/@actions/github/lib/github.js
-var github = __webpack_require__(5251);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@actions+core@3.0.1/node_modules/@actions/core/lib/core.js + 11 modules
+var core = __webpack_require__(9038);
+// EXTERNAL MODULE: ../../node_modules/.pnpm/@actions+github@9.1.1/node_modules/@actions/github/lib/github.js + 21 modules
+var github = __webpack_require__(5843);
 ;// CONCATENATED MODULE: ../pr-renderer/dist/comment.format.js
 // Pure renderer for the sticky PR summary comment.
 // No I/O, no Octokit, no node:* — testable in isolation.
@@ -127,20 +127,20 @@ async function postOrUpdateStickyComment(input) {
     if (input.eventName !== "pull_request")
         return;
     if (input.isFork) {
-        core.warning("Skipping PR comment: pull-requests:write not available on fork PRs");
+        core/* warning */.$e("Skipping PR comment: pull-requests:write not available on fork PRs");
         return;
     }
-    const pr = github.context.payload["pull_request"];
+    const pr = github/* context */._.payload["pull_request"];
     if (pr === undefined || typeof pr.number !== "number")
         return;
     const issueNumber = pr.number;
     const token = process.env["GITHUB_TOKEN"];
     if (typeof token !== "string" || token.length === 0) {
-        core.warning("Skipping PR comment: GITHUB_TOKEN not available");
+        core/* warning */.$e("Skipping PR comment: GITHUB_TOKEN not available");
         return;
     }
-    const octokit = github.getOctokit(token);
-    const { owner, repo } = github.context.repo;
+    const octokit = github/* getOctokit */.Q(token);
+    const { owner, repo } = github/* context */._.repo;
     const codeScanningUrl = `https://github.com/${owner}/${repo}/security/code-scanning?query=is%3Aopen+pr%3A${issueNumber}`;
     try {
         // T-05-03-03: per_page=100 cap. PRs with >100 comments may miss a prior
@@ -160,7 +160,7 @@ async function postOrUpdateStickyComment(input) {
                     comment_id: existing.id,
                     body: CLEAN_BODY,
                 });
-                core.info(`Updated sticky comment ${existing.id} to clean state`);
+                core/* info */.pq(`Updated sticky comment ${existing.id} to clean state`);
             }
             return;
         }
@@ -176,7 +176,7 @@ async function postOrUpdateStickyComment(input) {
                 comment_id: existing.id,
                 body,
             });
-            core.info(`Updated sticky comment ${existing.id}`);
+            core/* info */.pq(`Updated sticky comment ${existing.id}`);
         }
         else {
             const { data } = await octokit.rest.issues.createComment({
@@ -185,12 +185,12 @@ async function postOrUpdateStickyComment(input) {
                 issue_number: issueNumber,
                 body,
             });
-            core.info(`Created sticky comment ${data.id}`);
+            core/* info */.pq(`Created sticky comment ${data.id}`);
         }
     }
     catch (err) {
         const msg = err instanceof Error ? err.message : String(err);
-        core.warning(`PR comment failed: ${msg}`);
+        core/* warning */.$e(`PR comment failed: ${msg}`);
     }
 }
 
