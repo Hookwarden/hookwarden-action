@@ -1,8 +1,8 @@
-export const id = 614;
-export const ids = [614];
+export const id = 85;
+export const ids = [85];
 export const modules = {
 
-/***/ 5614:
+/***/ 1085:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -13,8 +13,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var node_fs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(node_fs__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var node_zlib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8522);
 /* harmony import */ var node_zlib__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(node_zlib__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9038);
-/* harmony import */ var _actions_github__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5843);
+/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2157);
+/* harmony import */ var _actions_github__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(9822);
 // SARIF upload to GitHub Code Scanning.
 //
 // ACTION-03: POST /repos/{owner}/{repo}/code-scanning/sarifs with gzip+base64 body.
@@ -89,4 +89,4 @@ async function uploadSarif(input) {
 
 };
 
-//# sourceMappingURL=614.index.js.map
+//# sourceMappingURL=85.index.js.map
