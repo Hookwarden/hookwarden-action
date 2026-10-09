@@ -1,8 +1,8 @@
-export const id = 140;
-export const ids = [140];
+export const id = 193;
+export const ids = [193];
 export const modules = {
 
-/***/ 3140:
+/***/ 5193:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 // ESM COMPAT FLAG
@@ -14,9 +14,9 @@ __webpack_require__.d(__webpack_exports__, {
 });
 
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@actions+core@3.0.1/node_modules/@actions/core/lib/core.js + 11 modules
-var core = __webpack_require__(2157);
+var core = __webpack_require__(5919);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@actions+github@9.1.1/node_modules/@actions/github/lib/github.js + 21 modules
-var github = __webpack_require__(9822);
+var github = __webpack_require__(6992);
 ;// CONCATENATED MODULE: ../pr-renderer/dist/comment.format.js
 // Pure renderer for the sticky PR summary comment.
 // No I/O, no Octokit, no node:* — testable in isolation.
@@ -199,4 +199,4 @@ async function postOrUpdateStickyComment(input) {
 
 };
 
-//# sourceMappingURL=140.index.js.map
+//# sourceMappingURL=193.index.js.map
